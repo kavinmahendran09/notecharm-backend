@@ -15,8 +15,8 @@ async def convert_notebook(file: UploadFile = File(...)):
     with open(temp_file.name, "wb") as f:
         f.write(await file.read())
     
-    # Define the output directory (using /tmp for writable directory)
-    pdf_output_dir = Path("/tmp/converted_files")  # Change to a writable directory
+    # Define the output directory (using /tmp for writable directory in cloud)
+    pdf_output_dir = Path("/tmp/converted_files")  # Cloud writable directory
     pdf_output_dir.mkdir(parents=True, exist_ok=True)
 
     # Define the output PDF path
@@ -27,7 +27,7 @@ async def convert_notebook(file: UploadFile = File(...)):
         # Convert the notebook to PDF using jupyter nbconvert
         subprocess.run(["jupyter", "nbconvert", "--to", "pdf", temp_file.name], check=True)
 
-        # Move the PDF to the output directory
+        # Move the generated PDF to the output directory
         shutil.move(f"{temp_file.name.replace('.ipynb', '.pdf')}", pdf_output_path)
 
         # Return the generated PDF file URL
