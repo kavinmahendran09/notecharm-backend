@@ -4,4 +4,4 @@ jupyter==1.0.0
 nbconvert==7.10.0
 python-multipart==0.0.6
 pydantic==1.10.12
-starlette==0.26.1 
+starlette==0.26.1
